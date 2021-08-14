@@ -1,0 +1,125 @@
+<h2>Validaciones: reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off"
+            [formGroup]="registerForm"
+            (ngSubmit)="save()">
+                
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                        class="form-control"
+                        formControlName="name"
+                        placeholder="Nombres y Apellidos del usuario">
+                    <span class="form-text text-danger"
+                            *ngIf="validateField('name')">
+                            Debe ser en formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email"
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Email del usuario">
+                    <span class="form-text  text-danger"
+                        *ngIf="validateField('email')">
+                        {{emailErrorMsg}}
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                        class="form-control"
+                        formControlName="username"
+                        placeholder="Nombre código del usuario">
+                    <!-- <span class="form-text text-danger">Debe ser en formato de nombre y apellido</span> -->
+                </div>
+            </div>
+
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                        class="form-control"
+                        formControlName="password"
+                        placeholder="Ingrese su contraseña">
+                    <!-- <span class="form-text text-danger">Debe ser en formato de nombre y apellido</span> -->
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                        class="form-control"
+                        formControlName="confirmPassword"
+                        placeholder="Confirme su contraseña">
+                    <span class="form-text text-danger"
+                            *ngIf="validateField('confirmPassword')">
+                            Las contraseñas deben ser iguales</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                    [disabled]="registerForm.pending"> 
+                        Registrar
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<h5>Nombre Válido</h5>
+<pre> {{ registerForm.controls?.name?.valid | json }} </pre>
+<hr>
+
+<h5>Email Válido</h5>
+<pre> {{ registerForm.controls?.email?.errors  | json }} </pre>
+<hr>
+
+<h5>Username Válido</h5>
+<pre> {{ registerForm.controls?.username?.valid  | json }} </pre>
+<hr>
+
+<h5>Password Válido</h5>
+<pre> {{ registerForm.controls?.password?.valid  | json }} </pre>
+<hr>
+
+<h5>Confirm Password Válido</h5>
+<pre> {{ registerForm.controls?.confirmPassword?.valid  | json }} </pre>
+<hr>
+
+<h5>Formulario Válido</h5>
+<pre> {{ registerForm.valid  | json }} </pre>
+<hr>
+
+<h5>Formulario Errors</h5>
+<pre> {{ registerForm.errors  | json }} </pre>
+<hr>
+
+
+
+

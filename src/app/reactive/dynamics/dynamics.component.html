@@ -1,0 +1,77 @@
+<h2>Template: <small>Dinámicos</small></h2>
+<hr>
+
+
+<form autocomplete="off"
+        [formGroup]="myForm"
+        (ngSubmit)="save()">
+
+    <!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-9">
+                <input  type="text"
+                        class="form-control"
+                        placeholder="Nombre de la persona"
+                        formControlName="name">
+                <span class="form-text text-danger"
+                        *ngIf="validateField('name')">
+                    Este es un campo obligatorio</span>
+            </div>
+    </div>
+
+
+    <!-- Agregar favorito-->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input  type="text"
+                            class="form-control"
+                            placeholder="Agregar favorito"
+                            [formControl]="newFavorite"
+                            (keyup.enter)="add()">
+                    
+                    <button class="btn btn-outline-primary"
+                            type="button"
+                            (click)="add()"> Agregar </button>
+                </div>
+                <span class="form-text text-danger"
+                        *ngIf="newFavorite.invalid &&
+                                newFavorite.touched">
+                    Este es un campo obligatorio</span>
+            </div>
+    </div>
+
+    <!-- Agregar -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+            <div class="col-sm-9"
+                formArrayName="favorite">
+                <div class="input-group mb-3"
+                    *ngFor="let item of favoriteArr.controls; let i = index">
+                        <input  type="text"
+                                class="form-control"
+                                [formControlName]="i">
+
+                        <button class="btn btn-outline-danger"
+                                type="button"
+                                (click)="delete(i)" > Eliminar </button>
+                    
+                    
+                </div>
+            </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm">
+            <button type="submit" 
+                    class="btn btn-primary float-end">Guardar</button>
+        </div>
+    </div>
+</form>
+
+
+<pre>{{ myForm.valid | json }}</pre>
